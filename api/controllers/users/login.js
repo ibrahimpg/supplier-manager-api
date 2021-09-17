@@ -14,11 +14,12 @@ module.exports = async (req, res) => {
 
     const token = jwt.sign({ username, id: userData._id.toString() }, process.env.JWT_KEY, { expiresIn: '4h' });
 
-    const data = { username, token };
+    const { email, companyName, companyDescription, imgUrl } = userData;
+
+    const data = { token, username, email, companyName, companyDescription, imgUrl };
 
     return res.status(200).json(data);
   } catch (err) {
-    console.log(err);
     return res.status(400).json(String(err.message));
   }
 };

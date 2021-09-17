@@ -1,13 +1,12 @@
 const { randomBytes } = require('crypto');
 const database = require('../../services/database');
 const { validateEmail } = require('../../utilities/validation');
-const { sendVerificationEmail } = require('../../services/email');
 
 module.exports = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const { id, username } = req.tokenData;
+    const { id } = req.tokenData;
 
     if (!validateEmail(email)[0]) return res.status(400).send(validateEmail(email)[1]);
 
@@ -20,8 +19,6 @@ module.exports = async (req, res) => {
     const updateObj = { email, verified: false, verificationCode };
 
     await database.updateOne('users', '_id', id, updateObj);
-
-    await sendVerificationEmail(email, username, verificationCode);
 
     return res.sendStatus(200);
   } catch (err) {

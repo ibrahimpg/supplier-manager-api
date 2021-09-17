@@ -8,4 +8,4 @@ app.use(express.json());
 
 app.use('/api', api);
 
-app.listen(process.env.port);
+app.listen(process.env.PORT);

@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    console.log(password);
+
     const userData = await database.findOne('users', 'username', username);
 
     if (userData === null) return res.status(401).send('Username doesn\'t exist.');

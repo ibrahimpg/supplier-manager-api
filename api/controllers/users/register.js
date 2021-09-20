@@ -7,8 +7,6 @@ module.exports = async (req, res) => {
   try {
     const { username, password, email } = req.body;
 
-    console.log(password);
-
     if (!validateNewUser(username, password, email)[0]) {
       return res.status(400).send(validateNewUser(username, password, email)[1]);
     }

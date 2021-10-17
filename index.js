@@ -15,4 +15,4 @@ app.use((req, res, next) => {
 
 app.use('/api', api);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => { console.log('app started...'); });
